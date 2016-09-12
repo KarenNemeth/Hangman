@@ -1,0 +1,24 @@
+#opener {
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    display: none;
+}
+
+#start {
+    position: relative;
+    justify-content: center;
+    text-align: center;
+}
+
+#ready {
+    font-size: 1em;
+    width: 60%;
+    height: 5%;
+    border-radius: 10px;
+    background-color: lightblue;
+}

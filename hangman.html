@@ -12,17 +12,17 @@
         </div>
     </div>
 
-    <div>
-        <canvas id="figure" width="600" height="800">
-        </canvas>
-        <canvas id="word" width="600" height="250">
-        </canvas>
-    </div>
-
-    <div id="closer">
-        <div id="closingContainer">
-            <h1></h1>
-            <button id="readyAgain">Let's Hang Another Man!</button>
+    <div id="game">
+        <div id="figure"><canvas width="600" height="800">
+        </canvas></div>
+        <div id="input">
+            <textarea id="userInput" placeholder="Guess a letter"></textarea>
+            <div id="alphabetContainer"></div>
+        </div>
+        <div id="theWord">
+            <div id="guesses"></div>
+            <textarea id="fullWordGuess" placeholder="Guess the full word!"></textarea>
+            <div id="fullWordGuesses"></div>
         </div>
     </div>
 

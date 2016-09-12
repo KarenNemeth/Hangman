@@ -1,3 +1,8 @@
+body {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
 #opener {
     height: 100%;
     width: 100%;
@@ -21,4 +26,70 @@
     height: 5%;
     border-radius: 10px;
     background-color: lightblue;
+}
+
+#figure {
+    float: left;
+    border: 3px solid black;
+    width: 60%;
+    height: 60%;
+    margin-bottom: 5%;
+}
+
+#input{
+    float: right;
+    border: 3px solid red;
+    width: 35%;
+    height: 60%;
+}
+
+#userInput {
+    height: 5%;
+    width: 100%;
+    border: 2px solid chocolate;
+}
+
+
+#alphabetContainer {
+    margin: auto;
+    border: 2px solid green;
+    height: 90%;
+    padding: 0;
+}
+
+#alphabetList {
+    position: relative;;
+    left:0;
+    padding: 0;
+}
+
+#letters {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: .5em;
+    padding: 0;
+    background-color: lightblue;
+    border: solid 1px blue;
+}
+
+#letters:hover {
+    border: solid 1px white;
+    background-color: white;
+  }
+
+
+#theWord {
+    clear: both;
+    border: 3px solid blue;
+    height: 35%;
+    position: relative;
+    display: block;
+    bottom: 100%;
+    position: relative;
+}
+
+#fullWordGuess{
+    width: 100%;
 }

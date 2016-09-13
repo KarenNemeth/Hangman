@@ -1,6 +1,7 @@
 body {
     margin-bottom: 0;
     padding-bottom: 0;
+    background-color: black;
 }
 
 #opener {
@@ -30,66 +31,106 @@ body {
 
 #figure {
     float: left;
-    border: 3px solid black;
+    border: 3px solid white;
     width: 60%;
-    height: 60%;
-    margin-bottom: 5%;
+    height: 100%;
 }
 
 #input{
     float: right;
     border: 3px solid red;
     width: 35%;
-    height: 60%;
+    height: 100%;
+    overflow: hidden;
 }
 
-#userInput {
-    height: 5%;
+#input h2{
+    text-align: center;
+    margin: 0;
+    padding: 1%;
+    color: white;
+}
+
+#letterBox{
+    position: relative;
+    height: 55%;
+    display: block;
+    overflow: hidden;
+
+}
+
+.userInput {
+    position: relative;
+    height: 2em;
     width: 100%;
-    border: 2px solid chocolate;
+    border: 2px solid yellow;
 }
 
+textarea {
+    position: relative;
+    height: 100%;
+    width: 70%;
+    background-color: #8FBC8F;
+}
+
+::-webkit-input-placeholder {
+   color: black;
+}
+
+.userInput button {
+    width: 20%;
+    height: 100%;
+    position: absolute;
+    margin-left: 5%;
+
+}
 
 #alphabetContainer {
-    margin: auto;
+    position: absolute;
+    height: auto;
     border: 2px solid green;
-    height: 90%;
-    padding: 0;
 }
 
 #alphabetList {
-    position: relative;;
-    left:0;
+    margin-top: 5px;
     padding: 0;
-}
-
-#letters {
-    list-style: none;
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
-    margin: .5em;
-    padding: 0;
-    background-color: lightblue;
-    border: solid 1px blue;
 }
 
-#letters:hover {
-    border: solid 1px white;
-    background-color: white;
+.letters {
+    list-style: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 2.2em;
+    width: 2.4em;
+    margin: 0.4em;
+    background-color: #00FF7F;
+    border: solid 1px blue;
+    border-radius: 3px;
+}
+
+.letters:hover {
+    border: solid 1px blue;
+    background-color: yellow;
   }
 
 
-#theWord {
+#wordBox {
     clear: both;
-    border: 3px solid blue;
-    height: 35%;
+    border: 2px solid blue;
+    height: 40%;
     position: relative;
     display: block;
-    bottom: 100%;
-    position: relative;
+    margin: 0;
 }
 
-#fullWordGuess{
-    width: 100%;
+@media (max-width: 950px){
+    .letters {
+        height: 2em;
+        width: 2em;
+    }
 }

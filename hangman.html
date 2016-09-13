@@ -13,16 +13,28 @@
     </div>
 
     <div id="game">
-        <div id="figure"><canvas width="600" height="800">
-        </canvas></div>
-        <div id="input">
-            <textarea id="userInput" placeholder="Guess a letter"></textarea>
-            <div id="alphabetContainer"></div>
+        <div id="figure">
+            <canvas>
+            </canvas>
+            <div id="word"></div>
         </div>
-        <div id="theWord">
-            <div id="guesses"></div>
-            <textarea id="fullWordGuess" placeholder="Guess the full word!"></textarea>
-            <div id="fullWordGuesses"></div>
+        <div id="input">
+            <div id="letterBox">
+                <h2>Letters</h2>
+                <div class="userInput">
+                    <textarea id="letterInput" maxlength="1" placeholder="Guess a letter"></textarea>
+                    <button id="letterButton">Try it!</button>
+                </div>
+                <div id="alphabetContainer"></div>
+            </div>
+            <div id="wordBox">
+                <h2>Words</h2>
+                <div class="userInput">
+                    <textarea id="wordInput" placeholder="Guess the full word!"></textarea>
+                    <button id="wordButton">Try it!</button>
+                </div>
+                <div id="fullWordGuesses"></div>
+            </div>
         </div>
     </div>
 

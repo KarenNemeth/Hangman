@@ -1,12 +1,10 @@
 (function() {
 
-    play(); //For testing purposes
-
 //Some Global Variables
     var alphabet = ["A", "B", "C", "D", "E", "F", "G", "H",
         "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
         "T", "U", "V", "W", "X", "Y", "Z"];
-    var words = ["gandalf", "smoking", "pipeweed", "hobbits", "towelie", "password"];
+    var words = ["gandalf", "smoking", "pipeweed", "hobbits", "towelie", "password", "javascript"];
     var chosenWord; //word
     var guessedLetter; //guess
     //var guessedWord;
@@ -15,38 +13,16 @@
     var lives;
     var correctNumberOfGuesses;
 
-//HTML Elements
-    //var initializeGame = document.getElementById("ready");
-    //var opener = document.getElementById("opener");
-    var closer = document.getElementById("closer");
-    var restartText = document.getElementById("restart");
-    var input = document.getElementById("input");
-
-
 // initializing game
+//  var initializeGame = document.getElementById("ready");
+//  var opener = document.getElementById("opener");
 //     initializeGame.addEventListener("click", function() {
 //         opener.style.display="none";
 //         play();
 //     });
 
-//gameplay
-    function play(){
-        chosenWord
-         = words[Math.floor(Math.random() * words.length)];
-        console.log(chosenWord);
-        inputs();
-
-        guessedLetters = [ ];
-        lives = 5;
-        correctNumberOfGuesses = 0;
-
-        listOfGuesses();
-        cityscape();
-
-        endGame();
-    }
-
 //Input Fields
+    var input = document.getElementById("input");
     function inputs() {
 
         //letter guesses
@@ -101,17 +77,72 @@
     }
 
 //Animation
+
+    //Patterns
+    var pattern = document.createElement('canvas');
+    var coolPattern = pattern.getContext('2d');
+        pattern.width = 2;
+        pattern.height = 10;
+
+    function newPattern(){
+        coolPattern.clearRect(0,0, pattern.width, pattern.height);
+        coolPattern.fillStyle = 'hsl(' + 360 * Math.random() + ', 50%, 50%)';
+        coolPattern.fillRect(0,0,12,14);
+        coolPattern.lineWidth = 1;
+        coolPattern.strokeStyle = 'rgb(255,255,255)';
+        coolPattern.strokeRect(0,0,22,22);
+        return(canvas.createPattern(pattern,'repeat'));
+    }
+
+
+    //Drawing
+    var cityscape = document.getElementById("cityscape");
+    var canvas = cityscape.getContext("2d");
+
+    function cityScape() {
+        canvas.fillStyle = newPattern();
+        canvas.fillRect(0, 260 , 100,240);
+
+
+        //
+        // canvas.moveTo();
+        // canvas.lineTo();
+        //
+        // canvas.moveTo();
+        // canvas.lineTo();
+        //
+        // canvas.moveTo();
+        // canvas.lineTo();
+        //
+        // canvas.moveTo();
+        // canvas.lineTo();
+        //
+        // canvas.moveTo();
+        // canvas.lineTo();
+    }
+
+    // function draw(fromX, fromY, toX, toY) {
+    //     canvas.moveTo(fromX, fromY);
+    //     canvas.lineTo(toX, toY);
+    //     canvas.stroke();
+    // }
+
+    //Execution
     function animate() {
         var drawing = lives;
         drawingOrder[drawing]();
     }
 
-    function cityscape() {
-        
+    //Resizing Effect
+    window.addEventListener('resize', resizeCityScape, false);
+
+    function resizeCityScape() {
+        cityScape();
     }
 
-
 //End Game
+    var closer = document.getElementById("closer");
+
     function endGame () {
         if (lives < 1){
             closer.style.display = " ";
@@ -119,14 +150,40 @@
             restartText.innerHTML = "You didn't complete the project in time! Think about all the homeless, unemployed people!";
         }
         if (correctNumberOfGuesses === guessedLetters.length) {
-            closer.style.display = "block";
+            closer.style.display = " ";
             input.style.display = "none";
             restartText.innerHTML = "Yay! You finished the project! Time for happy hour.";
         }
+        playAgain.addEventListener("click", restart);
     }
 
 //Restart Game
+    var restartText = document.getElementById("restart");
+    var playAgain = document.getElementById("goAgain");
 
+    function restart() {
+        playAgain.removeEventListener("click", restart);
+        input.style.display = " ";
+        closer.style.display = "none";
+        //clear rectangle, number of correct, letters guessed, words guessed, and innerHTML
+        play();
+    }
 
+//gameplay
+    function play(){
+        chosenWord = words[Math.floor(Math.random() * words.length)];
+        console.log(chosenWord);
+        inputs();
 
+        guessedLetters = [ ];
+        lives = 5;
+        correctNumberOfGuesses = 0;
+
+        listOfGuesses();
+        resizeCityScape();
+
+        endGame();
+    }
+
+    play(); //For testing purposes
 })();

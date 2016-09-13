@@ -14,27 +14,34 @@
 
     <div id="game">
         <div id="figure">
-            <canvas>
+            <canvas width="1000" height="350">
             </canvas>
             <div id="word"></div>
         </div>
         <div id="input">
-            <div id="letterBox">
-                <h2>Letters</h2>
-                <div class="userInput">
-                    <textarea id="letterInput" maxlength="1" placeholder="Guess a letter"></textarea>
-                    <button id="letterButton">Try it!</button>
+            <h2>This city is built on guesses!</h2>
+            <div id="userInput">
+                <div id="buttons">
+                    <textarea id="textArea" placeholder="Guess a letter or word."></textarea>
+                    <button id="buttonToGuess">Try it!</button>
                 </div>
-                <div id="alphabetContainer"></div>
-            </div>
-            <div id="wordBox">
-                <h2>Words</h2>
-                <div class="userInput">
-                    <textarea id="wordInput" placeholder="Guess the full word!"></textarea>
-                    <button id="wordButton">Try it!</button>
+                <div id="guessedWords">
+                    <table "failed">
+                        <tr>
+                            <td>Failed with:</td>
+                            <td id="tried"></td>
+                        </tr>
+                    </table>
+                    <div "guessedWordArray"></div>
                 </div>
-                <div id="fullWordGuesses"></div>
             </div>
+            <div id="alphabetContainer"></div>
+        </div>
+    </div>
+
+    <div id="closer">
+        <div id="restart">
+            <button id="goAgain">Let's Build It Again!</button>
         </div>
     </div>
 

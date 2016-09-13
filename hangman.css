@@ -25,50 +25,81 @@ body {
     font-size: 1em;
     width: 60%;
     height: 5%;
-    border-radius: 10px;
+    /*border-radius: 10px;*/
     background-color: lightblue;
 }
 
 #figure {
-    float: left;
-    border: 3px solid white;
-    width: 60%;
-    height: 100%;
+    position: relative;
+    /*border: 3px solid white;*/
+    width: 100%;
+    height: 60%;
+}
+
+canvas {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    position: relative;
+    /*border: 3px solid lightblue;*/
+}
+
+#word {
+    position: relative;
+    /*border: 2px solid yellow;*/
+    height: 50px;
+    width: 100%;
+    font-size: 2em;
+    color: white;
+    text-align: center;
+    letter-spacing: 1em;
+    text-transform: capitalize;
+}
+
+#word li {
+    list-style: none;
+    display: inline-block;
+    margin-bottom: 0;
 }
 
 #input{
-    float: right;
-    border: 3px solid red;
-    width: 35%;
-    height: 100%;
-    overflow: hidden;
+    /*border: 3px solid red;*/
+    width: 100%;
+    height: 35%;
+    position: relative;
+    bottom: 0;
+    z-index: 1;
 }
 
 #input h2{
+    position: relative;
     text-align: center;
-    margin: 0;
     padding: 1%;
     color: white;
+    height: auto;
 }
 
-#letterBox{
-    position: relative;
-    height: 55%;
-    display: block;
-    overflow: hidden;
-
-}
-
-.userInput {
-    position: relative;
-    height: 2em;
+#userInput {
+    height: 25%;
     width: 100%;
-    border: 2px solid yellow;
+    position: relative;
+    /*border: 2px solid yellow;*/
 }
 
-textarea {
+#buttons {
     position: relative;
+    width: 43%;
     height: 100%;
+    float: left;
+    margin: 1.5%;
+}
+
+#textarea {
+    margin-left: 1%;
+    position: relative;
+    height: 3em;
     width: 70%;
     background-color: #8FBC8F;
 }
@@ -77,18 +108,43 @@ textarea {
    color: black;
 }
 
-.userInput button {
-    width: 20%;
-    height: 100%;
-    position: absolute;
-    margin-left: 5%;
+#buttonToGuess {
+    position: relative;
+    float: right;
+    width: 25%;
+    height: 3em;
+    /*border-radius: 5px;*/
+}
 
+#guessedWords {
+    position: relative;
+    float: right;
+    /*border: 2px solid blue;*/
+    width: 50%;
+    height: 90%;
+    margin: 1.5%;
+}
+
+table {
+    position: relative;
+    height: 100%;
+}
+
+td {
+    margin-left: 1%;
+    color: white;
+    text-align: left;
+    vertical-align: bottom;
 }
 
 #alphabetContainer {
-    position: absolute;
-    height: auto;
-    border: 2px solid green;
+    margin-top: 4%;
+    position: relative;
+    clear: both;
+    height: 50%;
+    width: 100%;
+    bottom: 0;
+    /*border: 2px solid green;*/
 }
 
 #alphabetList {
@@ -109,28 +165,29 @@ textarea {
     width: 2.4em;
     margin: 0.4em;
     background-color: #00FF7F;
-    border: solid 1px blue;
+    /*border: solid 1px blue;*/
     border-radius: 3px;
 }
 
 .letters:hover {
-    border: solid 1px blue;
+    /*border: solid 1px blue;*/
     background-color: yellow;
   }
 
-
-#wordBox {
-    clear: both;
-    border: 2px solid blue;
-    height: 40%;
-    position: relative;
-    display: block;
-    margin: 0;
+#closer {
+    background-color: black;
+    height: 35%;
+    width: 100%;
+    z-index: 10;
+    position: absolute;
+    bottom: 0;
+    border: 2px solid yellow;
 }
 
-@media (max-width: 950px){
-    .letters {
-        height: 2em;
-        width: 2em;
-    }
+#restart {
+
+}
+
+#goAgain{
+
 }

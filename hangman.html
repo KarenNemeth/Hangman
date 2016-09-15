@@ -17,21 +17,23 @@
 
     <div id="game">
         <div id="figure">
+            <div id="airplane"><img src="airplane-banner.png"><div id="banner">Guess the whole word now!</div></img></div>
             <canvas width="900" height="500" id="cityscape">
             </canvas>
             <div id="word"></div>
         </div>
         <div id="input">
-            <h2>This city is built on wrong guesses!</h2>
+            <h2 id="message">This city is built on wrong guesses!</h2>
             <div id="userInput">
                 <div id="buttons">
-                    <textarea id="textArea" placeholder="Guess a letter or word."></textarea>
+                    <textarea id="textArea" placeholder="Guess the word!"></textarea>
                     <button id="buttonToGuess">Try it!</button>
                 </div>
                 <div id="guessedWords">
-                    <table "failed">
-                        <tr>
+                    <table>
+                        <tr id = "failed">
                             <td>Wrong:</td>
+                            <td></td>
                             <td id="tried"></td>
                         </tr>
                     </table>

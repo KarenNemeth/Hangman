@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hangman</title>
+    <title>Viva Web Vegas</title>
     <link type="text/css" rel="stylesheet" href="hangman.css"/>
 </head>
 <body>
     <div id="opener">
         <div id="start">
-            <h1>Cities Are Built On Rock And Roll!</h1>
-            <h3>(Not For People With Epilepsy)</h3>
+            <h1>Viva Web Vegas</h1>
+            <h3>(Not For People With Epilepsy or Alcoholism)</h3>
             <p>This game is like the classic hangman except the end game conditions have been reversed.</p>
             <h3>“Failures are finger posts on the road to achievement.” - C.S. Lewis </h3>
             <button id="ready">Are you ready?!</button>
@@ -23,7 +23,7 @@
             <div id="word"></div>
         </div>
         <div id="input">
-            <h2 id="message">This city is built on wrong guesses!</h2>
+            <h2 class="text" id="message">Build Las Vegas with wrong guesses!</h2>
             <div id="userInput">
                 <div id="buttons">
                     <textarea id="textArea" placeholder="Guess the word!"></textarea>
@@ -41,12 +41,15 @@
                 </div>
             </div>
             <div id="alphabetContainer"></div>
-        </div>
-    </div>
-
-    <div id="closer">
-        <div id="restart">
-            <button id="goAgain">Let's Build It Again!</button>
+            <div id="ending">
+                <h3 class="text" id="endingText"></h3>
+                <h3 class="text" id="finalStory"></h3>
+                <div id="answers">
+                        <button id="yes">Yes</button>
+                        <button id="no">No</button>
+                </div>
+                <button id="goAgain">Let's Build It Again!</button>
+            </div>
         </div>
     </div>
 

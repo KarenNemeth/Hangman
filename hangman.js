@@ -19,17 +19,17 @@
     var banner = document.getElementById("airplane");
     var userInputWord;
     var capitalized;
+    var setTime;
 
 // initializing game
-//  var initializeGame = document.getElementById("ready");
-//  var opener = document.getElementById("opener");
-//     initializeGame.addEventListener("click", function() {
-//         opener.style.display="none";
-//         play();
-//     });
+ var initializeGame = document.getElementById("ready");
+ var opener = document.getElementById("opener");
+    initializeGame.addEventListener("click", function() {
+        opener.style.display="none";
+        play();
+    });
 
 //Input Fields
-    var input = document.getElementById("input");
     var alphabetContainer = document.getElementById("alphabetContainer");
     var alphabetList;
     var letters;
@@ -58,7 +58,7 @@
     }
 
     function checkLetterClicked(e){
-        message.innerHTML = "This city is built on wrong guesses!";
+        message.innerHTML = "Las Vegas was built on mistakes.";
         if (e.target.id == "right" || e.target.id == "wrong"){
             message.innerHTML = "You've already guessed that letter!";
             return;
@@ -85,7 +85,7 @@
     }
     function checkLetterPressed(e) {
         key = e.key.toUpperCase();
-        message.innerHTML = "This city is built on wrong guesses!";
+        message.innerHTML = "Las Vegas was built on mistakes.";
         if (e.keyCode > 90 || e.keyCode < 65) {
             message.innerHTML = "Letter guesses only please!";
             console.log("non-letter guess");
@@ -186,7 +186,7 @@
         userInputWord = guessedWord.value;
         if (userInputWord.length != chosenWord.length) {
             message.innerHTML = "Please make sure you have the correct number of characters";
-            setTimeout(function(){message.innerHTML = "This city is built on wrong guesses!";}, 3000);
+            setTimeout(function(){message.innerHTML = "Las Vegas was built on mistakes.";}, 3000);
             return;
         }
         var triedWordsColumn = document.createElement("td");
@@ -315,7 +315,6 @@
         canvas.fillRect(1003,210,54,5);
     }
     function building5(){
-        console.log("wtf");
         canvas.fillStyle = buildingPattern();
         canvas.fillRect(275,100,100,400);
         canvas.fillRect(600,300,100,200);
@@ -343,35 +342,61 @@
     }
 
 //End Game
-    var closer = document.getElementById("closer");
-    var restartText = document.getElementById("restart");
+    var ending = document.getElementById("ending");
     var playAgain = document.getElementById("goAgain");
-    var setTime;
     var userInputButtons = document.getElementById("userInput");
+    var endText = document.getElementById("endingText");
+    var answers = document.getElementById("answers");
+    var finalStory = document.getElementById("finalStory");
+    var kingKong = false;
 
     function endGame () {
-        if (lives < 1){
+        function itsHappening(){
             window.cancelAnimationFrame(airplane);
             banner.style.display = "none";
-            closer.style.display = " ";
+            ending.style.display = "block";
             userInputButtons.style.display = "none";
             alphabetContainer.style.display = "none";
-            message.innerHTML = "The correct word was " + chosenWord;
-            celebration();
-    /*draw fireworks*/
-            restartText.createTextNode = '"You have not failed. You’ve just found 6 ways that won’t work."';
-            restartText.createTextNode = "Thankfully that's how most things have been built.";
-            restartText.createTextNode = "Congratulations on completing your city! Now, time to enjoy Happy Hour.";
             document.removeEventListener("keydown", checkLetterPressed, true);
         }
+        function definition(){
+            endText.innerHTML = "Do you know what this word means?";
+            console.log("Definition is working.");
+            answers.addEventListener("click", function(e){
+                answers.style.display = "none";
+                playAgain.style.display = "block";
+
+                if (e.target.id == "yes") {
+                    kingKong = true;
+                    endText.innerHTML = "Congratulations!";
+                }
+                if (e.target.id == "no") {
+                    endText.innerHTML = "This feature is to come!";
+                }
+            });
+        }
+        if (lives < 1){
+            message.innerHTML = "The correct word was " + chosenWordDefault;
+            celebration();
+            itsHappening();
+            definition();
+            finalStory.innerHTML = '"You have not failed. You&#39;ve just found 6 ways that won&#39;t work."\ And thankfully Vegas is built on failure anyway.\ Time to celebrate!';
+        }
         if (correctNumberOfGuesses === chosenWord.length || capitalized == chosenWord) {
-            window.cancelAnimationFrame(airplane);
-            banner.style.display = "none";
-            closer.style.display = " ";
-            input.style.display = "none";
-    /* king kong video*/
-            restartText.innerHTML = "The purpose of this game was to learn how to fail. You didn't seem to get that lesson, so your stalker killed himself in shame.";
-            document.removeEventListener("keydown", checkLetterPressed, true);
+            guessedLetters.innerHTML = chosenWord;
+            itsHappening();
+            message.innerHTML = "Now for your last test....";
+            definition();
+            answers.addEventListener("click", function(){
+                if (kingKong) {
+                /* king kong video*/
+                    finalStory.innerHTML = "You&#39;re such a show off, you know? Even I don&#39;t know as much as you do and I&#39;m a computer! \ It has attracted King Kong. He&#39;s destroying your city.\ Now you have to move to Reno....";
+                }
+                else {
+                    celebration();
+                    finalStory.innerHTML = "You learn something new everyday!";
+                }
+            });
         }
         playAgain.addEventListener("click", restart);
     }
@@ -379,14 +404,7 @@
 //Restart Game
     function restart() {
         playAgain.removeEventListener("click", restart);
-        input.style.display = " ";
-        closer.style.display = "none";
-        chosenWordDefault = "";
-        position = 100;
-        clearTimeout(setTime);
-        canvas.clearRec(0,0,900,500);
-        //number of correct, letters guessed, words guessed, and innerHTML
-        play();
+        location.reload();
     }
 
 //choosing word
@@ -432,6 +450,4 @@
         airplane();
         listOfGuesses();
     }
-
-    play(); //For testing purposes
 })();

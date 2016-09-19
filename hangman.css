@@ -6,27 +6,93 @@ body {
 
 /*opening*/
 #opener {
+    position: fixed;
     height: 100%;
     width: 100%;
     background-color: white;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     z-index: 10;
-    display: none;
+    padding: 0;
+    background-color: black;
 }
-
+#lasVegasStrip {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    margin: 0;
+    top: 0;
+    left: 0;
+}
+video:first-of-type {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+#transparency{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    top: 0;
+    left: 0;
+    background-color: black;
+    opacity: 0.2;
+}
 #start {
-    position: relative;
+    width: 100%;
+    height: 100%;
+    color: white;
     justify-content: center;
     text-align: center;
+    font-family: "Lucida Grande";
+    z-index: 15;
+    padding-bottom: 15px
+}
+#title {
+    font-family: "Fabulous";
+    font-size: 7em;
+    margin-bottom: 0;
+    top: 25%;
+    position:relative;
+}
+#disclaimer{
+    font-size: 0.8em;
+}
+#rules {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    font-family: "Lucida Grande";
+    padding-bottom: 20px;
+}
+@font-face {
+    font-family: "Fabulous";
+    src: url("media/Fabulous.ttf");
+}
+#readyButton {
+    position: relative;
+    width: 100%;
+    top: 33%;
+}
+#ready {
+	background-color:#f9f9f9;
+	border-radius:28px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#666666;
+	font-family:Arial;
+	font-size:17px;
+	padding:16px 31px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffffff;
+    position: relative;
+}
+#ready:hover {
+	background-color:#e9e9e9;
 }
 
-.ready {
-    font-size: 1em;
-    width: 60%;
-    height: 5%;
-    background-color: lightblue;
+#game{
+    display: ;
 }
 
 /*animations*/
@@ -46,6 +112,7 @@ body {
     display: inline-block;
     margin-top: 3%;
     z-index: 100;
+    left: 120%;
 }
 #banner {
     position: absolute;
@@ -85,7 +152,6 @@ body {
     bottom: 0;
     z-index: 1;
 }
-
 .text {
     position: relative;
     text-align: center;
@@ -201,8 +267,29 @@ td {
     bottom: 0;
     display: none;
 }
+#videos{
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+#fallout {
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
+    display: none;
+}
+#fountains {
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
+    display: none;
+}
 #answers {
-    width: 30%;
+    width: 200px;
     position: relative;
     display: block;
     padding-top: 0;

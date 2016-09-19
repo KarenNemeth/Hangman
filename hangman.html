@@ -6,24 +6,41 @@
 </head>
 <body>
     <div id="opener">
+        <div id="lasVegasStrip">
+            <video playsinline autoplay muted loop>
+                <source src="media/openingbackground.mp4" type="video/mp4">
+            </video>
+            <div id="transparency"></div>
+        </div>
         <div id="start">
-            <h1>Viva Web Vegas</h1>
-            <h3>(Not For People With Epilepsy or Alcoholism)</h3>
-            <p>This game is like the classic hangman except the end game conditions have been reversed.</p>
-            <h3>“Failures are finger posts on the road to achievement.” - C.S. Lewis </h3>
-            <button id="ready">Are you ready?!</button>
+            <h1 id="title">Viva Web Vegas</h1>
+            <div id="readyButton"><button id="ready">Are you ready?!</button></div>
+            <div id="rules">
+                <p>Guess some letters or the whole world to see how Web Vegas evolves!</p>
+                <p>&#34;Failures are finger posts on the road to achievement.&#34; - C.S. Lewis </p>
+                <p id="disclaimer">(Not For People With Epilepsy or Alcoholism)</p>
+            </div>
         </div>
     </div>
-
     <div id="game">
         <div id="figure">
-            <div id="airplane"><img src="airplane-banner.png"><div id="banner">Guess the whole word now!</div></img></div>
+            <audio loop><source src="media/airplane-flyby.mp3" type="audio/mp3"></audio>
+            <div id="airplane"><img src="media/airplane-banner.png"><div id="banner">Guess the whole word now!</div></img></div>
             <canvas width="900" height="500" id="cityscape">
             </canvas>
+            <audio><source src="media/building.mp3" type="audio/mp3"></audio>
             <div id="word"></div>
+            <div id="videos">
+                <video playsinline controls id="fallout">
+                    <source src="media/fallout.mp4" type="video/mp4">
+                </video>
+                <video playsinline controls id="fountains">
+                    <source src="media/fountains.mp4" type="video/mp4">
+                </video>
+            </div>
         </div>
         <div id="input">
-            <h2 class="text" id="message">Build Las Vegas with wrong guesses!</h2>
+            <h2 class="text" id="message">Build Web Vegas with wrong guesses!</h2>
             <div id="userInput">
                 <div id="buttons">
                     <textarea id="textArea" placeholder="Guess the word!"></textarea>
@@ -48,11 +65,11 @@
                         <button id="yes">Yes</button>
                         <button id="no">No</button>
                 </div>
+                <audio><source src="media/cheering.mp3" type="audio/mp3"></audio>
                 <button id="goAgain">Let's Build It Again!</button>
             </div>
         </div>
     </div>
-
 <script src="hangman.js"></script>
 </body>
 </html>

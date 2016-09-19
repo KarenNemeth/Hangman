@@ -1,39 +1,74 @@
 (function() {
 
-//Some Global Variables
+//Global Definitions
+    var xhr = new XMLHttpRequest;
+
+    //Variables
     var alphabet = ["A", "B", "C", "D", "E", "F", "G", "H",
         "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
         "T", "U", "V", "W", "X", "Y", "Z"];
     var words = ["gandalf", "smoking", "pipeweed", "hobbits", "towelie", "password", "javascript"];
-    var chosenWordDefault; //word
+    var chosenWordDefault;
     var chosenWord;
-    var guessedLetter; //guess
-    var guessedWord;
-    var guessedLetters = []; //guessesArray
+    var alphabetList;
+    var letters;
+    var letterList = [];
+    var guessedLetter;
+    var guessedLetters = [];
     var lives;
     var correctNumberOfGuesses;
     var key;
-    var message = document.getElementById("message");
-    var errorFlag = true;
-    var xhr = new XMLHttpRequest;
-    var banner = document.getElementById("airplane");
     var userInputWord;
     var capitalized;
     var setTime;
 
+    //Booleans
+    var errorFlag = true;
+    var stopFlying = false;
+    var noEvent = true;
+    var notCelebrating = true;
+    var falloutToPlay = false;
+    var fountains = false;
+    var failed = false;
+    var solved = false;
+
+    //Elements
+    var message = document.getElementById("message");
+    var banner = document.getElementById("airplane");
+    var game = document.getElementById("game");
+    var alphabetContainer = document.getElementById("alphabetContainer");
+    var initializeGame = document.getElementById("ready");
+    var opener = document.getElementById("opener");
+    var guessedWord = document.getElementById("textArea");
+    var buttonToGuess = document.getElementById("buttonToGuess");
+    var triedWords = document.getElementById("failed");
+    var cityscape = document.getElementById("cityscape");
+    var canvas = cityscape.getContext("2d");
+    var planeAudio = document.getElementsByTagName("audio")[0];
+    var buildingAudio = document.getElementsByTagName("audio")[1];
+    var cheering = document.getElementsByTagName("audio")[2];
+    var ending = document.getElementById("ending");
+    var playAgain = document.getElementById("goAgain");
+    var userInputButtons = document.getElementById("userInput");
+    var endText = document.getElementById("endingText");
+    var answers = document.getElementById("answers");
+    var finalStory = document.getElementById("finalStory");
+    var fallout = document.getElementById("fallout");
+    var openingVideo = document.getElementsByTagName("video")[0];
+    var falloutVideo = document.getElementsByTagName("video")[1];
+    var fountainsVideo = document.getElementsByTagName("video")[2];
+    var fountainsContainer = document.getElementById("fountains");
+    var videos = document.getElementById("videos");
+
 // initializing game
- var initializeGame = document.getElementById("ready");
- var opener = document.getElementById("opener");
     initializeGame.addEventListener("click", function() {
-        opener.style.display="none";
+        opener.style.display = "none";
+        game.style.display = "block";
+        openingVideo.pause();
         play();
     });
 
 //Input Fields
-    var alphabetContainer = document.getElementById("alphabetContainer");
-    var alphabetList;
-    var letters;
-    var letterList = [];
 
     function inputs() {
 
@@ -59,8 +94,11 @@
 
     function checkLetterClicked(e){
         message.innerHTML = "Las Vegas was built on mistakes.";
+        if (e.target === e.currentTarget) {
+            return;
+        }
         if (e.target.id == "right" || e.target.id == "wrong"){
-            message.innerHTML = "You've already guessed that letter!";
+            message.innerHTML = "You&#39;ve already guessed that letter!";
             return;
         }
         guessedLetter = e.target.innerHTML;
@@ -85,10 +123,9 @@
     }
     function checkLetterPressed(e) {
         key = e.key.toUpperCase();
-        message.innerHTML = "Las Vegas was built on mistakes.";
+        message.innerHTML = "Las Vegas thrives on failure.";
         if (e.keyCode > 90 || e.keyCode < 65) {
             message.innerHTML = "Letter guesses only please!";
-            console.log("non-letter guess");
             return;
         } else {
             for (var j = 0; j < alphabet.length; j++){
@@ -98,7 +135,6 @@
                         return;
                     }
                     guessedLetter = letterList[j].innerHTML;
-                    console.log(guessedLetter);
                     for (var i = 0; i < chosenWord.length; i++){
                         if (chosenWord[i] === guessedLetter) {
                             guessedLetters[i].innerHTML = guessedLetter;
@@ -123,11 +159,7 @@
     }
 
 //Guess whole word
-
     var position = 120;
-    var stopFlying = false;
-    var noEvent = true;
-
     function airplane(){
         banner.style.left = position + "%";
         position -= 0.15;
@@ -138,6 +170,7 @@
             window.cancelAnimationFrame(airplane);
             position = 110;
             if (stopFlying) {
+                planeAudio.pause();
                 return;
             }
         }
@@ -147,11 +180,13 @@
     }
     function airplaneStop(){
         noEvent = true;
+        planeAudio.play();
         airplane();
     }
 
     banner.addEventListener("mouseenter", function(){
         noEvent = false;
+        planeAudio.pause();
         window.cancelAnimationFrame(airplane);
     });
     banner.addEventListener("mouseleave", airplaneStop);
@@ -161,10 +196,6 @@
     });
 
     //Enter a Word
-
-    guessedWord = document.getElementById("textArea");
-    var buttonToGuess = document.getElementById("buttonToGuess");
-    var triedWords = document.getElementById("failed");
 
     guessedWord.addEventListener("focusin", function(){
         document.removeEventListener("keydown", checkLetterPressed);
@@ -186,7 +217,7 @@
         userInputWord = guessedWord.value;
         if (userInputWord.length != chosenWord.length) {
             message.innerHTML = "Please make sure you have the correct number of characters";
-            setTimeout(function(){message.innerHTML = "Las Vegas was built on mistakes.";}, 3000);
+            setTimeout(function(){message.innerHTML = "Don&#39;t worry&#44; what happens in Web Vegas stays in Web Vegas.";}, 3000);
             return;
         }
         var triedWordsColumn = document.createElement("td");
@@ -195,9 +226,6 @@
         guessedWord.value = "";
         checkWord();
     }
-
-    //Check word
-
     function checkWord(){
         capitalized = userInputWord.toUpperCase();
         if (capitalized != chosenWord) {
@@ -241,8 +269,6 @@
     }
 
     //Drawing
-    var cityscape = document.getElementById("cityscape");
-    var canvas = cityscape.getContext("2d");
 
     function building1(){
         canvas.fillStyle = buildingPattern();
@@ -297,6 +323,16 @@
         canvas.closePath();
         canvas.fillStyle = 'hsl(' + 360 * Math.random() + ', 50%, 50%)';
         canvas.fill();
+    }
+    function building5(){
+        canvas.fillStyle = buildingPattern();
+        canvas.fillRect(275,100,100,400);
+        canvas.fillRect(600,300,100,200);
+        canvas.fillStyle = buildingPattern();
+        canvas.fillRect(435, 160, 50, 140);
+    }
+    function building6(){
+        canvas.fillStyle = buildingPattern();
         canvas.fillRect(980,480,100,20);
         canvas.fillRect(970,460,120,20);
         canvas.fillRect(980,440,100,20);
@@ -314,50 +350,37 @@
         canvas.fillRect(1000,215,60,5);
         canvas.fillRect(1003,210,54,5);
     }
-    function building5(){
-        canvas.fillStyle = buildingPattern();
-        canvas.fillRect(275,100,100,400);
-        canvas.fillRect(600,300,100,200);
-        canvas.fillStyle = buildingPattern();
-        canvas.fillRect(435, 160, 50, 140);
-    }
-    function fireworks(){
-        console.log("on order");
-    }
 
-    var buildingOrder = [fireworks, building5, building4, building3, building2, building1];
+    var buildingOrder = [building6, building5, building4, building3, building2, building1];
 
     //Execution
     function animate() {
+        buildingAudio.play();
         var building = lives;
         buildingOrder[building]();
     }
     function celebration() {
+        notCelebrating = false;
         building1();
         building2();
         building3();
         building4();
         building5();
+        building6();
         setTime = setTimeout(celebration, 300);
     }
 
 //End Game
-    var ending = document.getElementById("ending");
-    var playAgain = document.getElementById("goAgain");
-    var userInputButtons = document.getElementById("userInput");
-    var endText = document.getElementById("endingText");
-    var answers = document.getElementById("answers");
-    var finalStory = document.getElementById("finalStory");
-    var kingKong = false;
-
     function endGame () {
         function itsHappening(){
+            planeAudio.pause();
             window.cancelAnimationFrame(airplane);
             banner.style.display = "none";
             ending.style.display = "block";
             userInputButtons.style.display = "none";
             alphabetContainer.style.display = "none";
-            document.removeEventListener("keydown", checkLetterPressed, true);
+            alphabetList.addEventListener("click", checkLetterClicked);
+            document.removeEventListener("keydown", checkLetterPressed);
         }
         function definition(){
             endText.innerHTML = "Do you know what this word means?";
@@ -365,39 +388,65 @@
             answers.addEventListener("click", function(e){
                 answers.style.display = "none";
                 playAgain.style.display = "block";
-
+                endText.style.display = "none";
                 if (e.target.id == "yes") {
-                    kingKong = true;
-                    endText.innerHTML = "Congratulations!";
+                    falloutToPlay = true;
+                    fountains = true;
+                    message.innerHTML = "Congratulations!";
                 }
                 if (e.target.id == "no") {
-                    endText.innerHTML = "This feature is to come!";
+                    message.innerHTML = "Too bad...";
                 }
             });
         }
         if (lives < 1){
+            failed = true;
             message.innerHTML = "The correct word was " + chosenWordDefault;
+            buildingAudio.pause();
             celebration();
+            cheering.play();
             itsHappening();
             definition();
-            finalStory.innerHTML = '"You have not failed. You&#39;ve just found 6 ways that won&#39;t work."\ And thankfully Vegas is built on failure anyway.\ Time to celebrate!';
+            finalStory.innerHTML = '&#34;You have not failed. You&#39;ve just found 6 ways that won&#39;t work.&#34;\ And thankfully Vegas is built on failure anyway.\ Time to celebrate!';
         }
         if (correctNumberOfGuesses === chosenWord.length || capitalized == chosenWord) {
-            guessedLetters.innerHTML = chosenWord;
+            solved = true;
+            for (var l=0; l < chosenWord.length; l++){
+                guessedLetters[l].innerHTML = chosenWord[l];
+            }
             itsHappening();
-            message.innerHTML = "Now for your last test....";
+            message.innerHTML = "Congratulations! Now for your last test....";
             definition();
-            answers.addEventListener("click", function(){
-                if (kingKong) {
-                /* king kong video*/
-                    finalStory.innerHTML = "You&#39;re such a show off, you know? Even I don&#39;t know as much as you do and I&#39;m a computer! \ It has attracted King Kong. He&#39;s destroying your city.\ Now you have to move to Reno....";
-                }
-                else {
-                    celebration();
-                    finalStory.innerHTML = "You learn something new everyday!";
-                }
-            });
         }
+        answers.addEventListener("click", function(){
+            if (falloutToPlay && solved) {
+                cheering.pause();
+                videos.style.display = "block";
+                cityscape.style.display = "none";
+                fallout.style.display = "block";
+                falloutVideo.play();
+                finalStory.innerHTML = "You&apos;re such a smartass. Oops! Look what I did. Now you have to move to Reno....";
+            }
+            else if (fountains && failed) {
+                cheering.pause();
+                videos.style.display = "block";
+                cityscape.style.display = "none";
+                fountainsContainer.style.display = "block";
+                fountainsVideo.play();
+                for (var l=0; l < chosenWord.length; l++){
+                    guessedLetters[l].innerHTML = chosenWord[l];
+                }
+                console.log("fountains running");
+                finalStory.innerHTML = "You've won!";
+            }
+            else {
+                if (notCelebrating) {
+                    celebration();
+                    cheering.play();
+                }
+                finalStory.innerHTML = "I don&apos;t know what it means either!";
+            }
+        });
         playAgain.addEventListener("click", restart);
     }
 
@@ -407,7 +456,7 @@
         location.reload();
     }
 
-//choosing word
+//gameplay
     function getRandomWord(){
         var randomNumberForWord = ((Math.floor(Math.random() * 6) + 1 ) + 5);
         var url = 'http://www.setgetgo.com/randomword/get.php?len=' + randomNumberForWord;
@@ -431,9 +480,6 @@
             play();
         });
     }
-
-//gameplay
-
     function play(){
 
         if (typeof chosenWordDefault === 'undefined'){
@@ -448,6 +494,7 @@
         correctNumberOfGuesses = 0;
 
         airplane();
+        planeAudio.play();
         listOfGuesses();
     }
 })();
